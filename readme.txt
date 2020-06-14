@@ -1,7 +1,7 @@
-³ÌĞòÎª¹ÉÆ±Í·´çÎ¬»¤ÏµÍ³
+ç¨‹åºä¸ºè‚¡ç¥¨å¤´å¯¸ç»´æŠ¤ç³»ç»Ÿï¼Œæ”¯æŒè‚¡ç¥¨æŒä»“å®æ—¶æŸ¥è¯¢ï¼Œå¹¶å°†è‚¡ç¥¨äº¤æ˜“å†™å…¥mysqlæ•°æ®åº“ã€‚
 
-1.Êı¾İ×¼±¸
-ÏÂµ¥ÇëÇó±¨ÎÄ
+1.æ•°æ®å‡†å¤‡
+ä¸‹å•è¯·æ±‚æŠ¥æ–‡
 http://localhost:8080/order?tradeID=1&version=1&quantity=50&securityCode=REL&command=INSERT&tradeMark=Buy
 http://localhost:8080/order?tradeID=2&version=1&quantity=40&securityCode=ITC&command=INSERT&tradeMark=Sell
 http://localhost:8080/order?tradeID=3&version=1&quantity=70&securityCode=INF&command=INSERT&tradeMark=Buy
@@ -9,22 +9,23 @@ http://localhost:8080/order?tradeID=1&version=2&quantity=60&securityCode=REL&com
 http://localhost:8080/order?tradeID=2&version=2&quantity=30&securityCode=ITC&command=CANCEL&tradeMark=Buy
 http://localhost:8080/order?tradeID=4&version=1&quantity=20&securityCode=INF&command=INSERT&tradeMark=Sell
 
-¹ÉÆ±µ±Ç°³Ö²Ö²éÑ¯
+è‚¡ç¥¨å½“å‰æŒä»“æŸ¥è¯¢
 http://localhost:8080/getRTPositions
 
-2.µ¥Ôª²âÊÔÀà½éÉÜ
-°üÂ·¾¶com.equity.demo.ut
-OrderMapperTest---Îªmapping²âÊÔÀà£¬Ö÷Òª¸ºÔğÊı¾İ¿â²Ù×÷
-TransControllerTest---¶ÔcontrollerµÄjunit²âÊÔ
-TransServiceTest---¶ÔserviceÀïÖ÷Òª·½·¨µÄjunit²âÊÔ£¬Ö÷Òª²âÊÔ²¢·¢Çé¿öÏÂµÄ³Ö²Ö¼ÆËãÊÇ·ñÕıÈ·
-ConcurrentTests---ĞÔÄÜ²âÊÔ(±¾´ÎÃ»ÓĞÓÃµ½)
+2.å•å…ƒæµ‹è¯•ç±»ä»‹ç»
+åŒ…è·¯å¾„com.equity.demo.ut
+OrderMapperTest---ä¸ºmappingæµ‹è¯•ç±»ï¼Œä¸»è¦è´Ÿè´£æ•°æ®åº“æ“ä½œ
+TransControllerTest---å¯¹controllerçš„junitæµ‹è¯•
+TransServiceTest---å¯¹serviceé‡Œä¸»è¦æ–¹æ³•çš„junitæµ‹è¯•ï¼Œä¸»è¦æµ‹è¯•å¹¶å‘æƒ…å†µä¸‹çš„æŒä»“è®¡ç®—æ˜¯å¦æ­£ç¡®
+ConcurrentTests---æ€§èƒ½æµ‹è¯•(æœ¬æ¬¡æ²¡æœ‰ç”¨åˆ°)
 
-3.Éè¼ÆË¼Â·£º
-ÒòÎªÊÇ¹ÉÆ±½»Ò×ÏµÍ³£¬ËùÒÔÉè¼ÆÔ­ÔòÓ¦¸ÃÊÇÖ§³Ö¶à²¢·¢£¬¹ÉÊĞ³Ö²ÖĞĞÇéÒ²ĞèÒªÊµÊ±¸üĞÂ£¬ËùÒÔĞèÒª³Ö²Ö´æÈëÄÚ´æÊµÊ±¼ÆËã£¬
-¸üĞÂ³Ö²ÖÊ±ĞèÒª¶Ôµ±Ç°¹ÉÆ±µÄ³Ö²Ö¼ÓËøÔÙ½øĞĞ¼ÆËã¡£
+3.è®¾è®¡æ€è·¯ï¼š
+å› ä¸ºæ˜¯è‚¡ç¥¨äº¤æ˜“ç³»ç»Ÿï¼Œæ‰€ä»¥è®¾è®¡åŸåˆ™åº”è¯¥æ˜¯æ”¯æŒå¤šå¹¶å‘ï¼Œè‚¡å¸‚æŒä»“è¡Œæƒ…ä¹Ÿéœ€è¦å®æ—¶æ›´æ–°ï¼Œæ‰€ä»¥éœ€è¦æŒä»“å­˜å…¥å†…å­˜å®æ—¶è®¡ç®—ï¼Œ
+æ›´æ–°æŒä»“æ—¶éœ€è¦å¯¹å½“å‰è‚¡ç¥¨çš„æŒä»“åŠ é”å†è¿›è¡Œè®¡ç®—ã€‚
 
-²¢·¢µÄ³¡¾°ÏÂ£¬¸ßÓÅÏÈ¼¶µÄÖ¸Áî¿ÉÄÜ»áÑÓ³Ùµ½´ï£¬ËùÒÔÉè¼ÆÁËÅÅĞòÁĞ±í£¬Ö§³ÖÑÓ³Ù½»Ò×ÅÅ¶Ó»úÖÆ£¬
-´ı½»Ò×µ½´ïºóÔÚ¶Ô³Ö²ÖÁ¿½øĞĞÒ»´ÎºÏ²¢¼ÆËã£¬È·±£³Ö²ÖµÄÕıÈ·ĞÔ¡£
+å¹¶å‘çš„åœºæ™¯ä¸‹ï¼Œé«˜ä¼˜å…ˆçº§çš„æŒ‡ä»¤å¯èƒ½ä¼šå»¶è¿Ÿåˆ°è¾¾ï¼Œæ‰€ä»¥è®¾è®¡äº†æ’åºåˆ—è¡¨ï¼Œæ”¯æŒå»¶è¿Ÿäº¤æ˜“æ’é˜Ÿæœºåˆ¶ï¼Œ
+å¾…äº¤æ˜“åˆ°è¾¾ååœ¨å¯¹æŒä»“é‡è¿›è¡Œä¸€æ¬¡åˆå¹¶è®¡ç®—ï¼Œç¡®ä¿æŒä»“çš„æ­£ç¡®æ€§ã€‚
 
+4.order.sqlä¸ºå»ºè¡¨è„šæœ¬ã€‚mysqlçš„è¿æ¥å¯†ç æ˜¯123456
 
 
