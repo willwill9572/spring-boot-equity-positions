@@ -2,6 +2,8 @@ package com.equity.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.equity.demo.common.Command;
 import com.equity.demo.model.Order;
 import com.equity.demo.service.TransactionsService;
 
@@ -45,6 +48,17 @@ public class TransactionsController {
 		}
 		return null;
 	}
+	
+	public boolean checkParamValid(Order order) {
+		if (order.getCommand().equals(Command.UPDATE) || 
+			order.getCommand().equals(Command.CANCEL)) {
+			if(order.getVersion() <= 1) {
+				logger.error("参数校验出错，version值不合法");
+				return false;
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * 
@@ -56,20 +70,13 @@ public class TransactionsController {
 	 */
 	@RequestMapping("/order")
 	@ResponseBody
-	public String insert(Order Order) {
-		//参数检查
-		if (Order.getTradeID() == null || 
-			Order.getVersion() == null || 
-			Order.getSecurityCode() == null || 
-			Order.getCommand() == null || 
-			Order.getQuantity()== null ||
-			Order.getTradeMark() == null
-			) {
-			return "下单出错，参数不能为空";
-		}
+	public String insert(@Valid Order order) {
 		//下单
 		try {
-			transactionsService.insert(Order);
+			if(!checkParamValid(order)) {
+				throw new RuntimeException();
+			}
+			transactionsService.insert(order);
 		} catch (Exception e) {
 			logger.error(e.toString());
 			return "下单失败，异常信息: " + e.toString();

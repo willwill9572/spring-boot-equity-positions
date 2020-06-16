@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
+import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,23 @@ public class TransactionsService {
 
 	private ConcurrentHashMap<String, Positions> realTimePositionsMap = new ConcurrentHashMap<String, Positions>();
 
-	private Lock lock = new ReentrantLock();
+	public ConcurrentHashMap<String, Positions> getRealTimePositionsMap() {
+		return realTimePositionsMap;
+	}
+
+	/**
+	 * 
+	* @Title: init  
+	* @Description: 初始化持仓数据
+	* @return void    返回类型  
+	* @throws
+	 */
+	@PostConstruct
+	public void init() {
+		realTimePositionsMap.put("REL", new Positions());
+		realTimePositionsMap.put("ITC", new Positions());
+		realTimePositionsMap.put("INF", new Positions());
+	}
 
 	/**
 	 * 
@@ -81,7 +97,6 @@ public class TransactionsService {
 				strValue = "+" + strValue;
 			} 
 			positList.add("股票名称:" + entry.getKey() + ", 当前仓位:" + strValue);
-			logger.info("股票名称:" + entry.getKey() + ", 当前仓位:" + strValue);
 		}
 		return positList;
 	}
@@ -100,28 +115,25 @@ public class TransactionsService {
 	* @throws
 	 */
 	public void PositionsCal(Order order) {
-		Positions positions = null;
-		lock.lock();
 		try {
 			// 取得当前股票
 			String strKey = order.getSecurityCode();
-			if ((positions = realTimePositionsMap.get(strKey)) == null) {
-				positions = new Positions();
+			Positions positions = realTimePositionsMap.get(strKey);
+			
+			//只锁当前合约的对象
+			synchronized (positions) {
+				// 后面版本如果先到的话，加入延迟订单队列
+				if(order.getVersion() > 1) {
+					positions.addToOrderList(order);	
+				}
+				// 获取持仓并实时计算
+				positions.setPositions(order);
+				// 写入缓存
+				realTimePositionsMap.put(order.getSecurityCode(), positions);
 			}
-			// 后面版本如果先到的话，加入延迟订单队列
-			if(order.getVersion() > 1) {
-				positions.addToOrderList(order);	
-			}
-			// 获取持仓并实时计算
-			positions.setPositions(order);
-			// 写入缓存
-			realTimePositionsMap.put(order.getSecurityCode(), positions);
-
 		} catch (Exception e) {
 			logger.error(e.toString());
-		} finally {
-			lock.unlock();
-		}
+		} 
 	}
 
 	/**
