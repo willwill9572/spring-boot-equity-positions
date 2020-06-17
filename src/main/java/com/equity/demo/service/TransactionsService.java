@@ -65,7 +65,9 @@ public class TransactionsService {
 	public void setSign(Order order) {
 
 		if (order.getTradeMark().equals("Sell")) {
-			order.setQuantity(0 - order.getQuantity());
+			if(order.getQuantity() > 0) {
+				order.setQuantity((-1) * order.getQuantity());
+			}
 		}
 	}
 
