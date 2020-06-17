@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 /**  
@@ -19,15 +20,16 @@ public class Order implements Comparable<Order>,Serializable {
 	
 	private Long transactionID;
 	
-	@NotBlank(message = "tradeID不能为空")
+	@NotNull(message = "version不能为空")
 	@DecimalMin("1")
 	private Integer tradeID;
 	
-	@NotBlank(message = "version不能为空")
+	@NotNull(message = "version不能为空")
 	@DecimalMin("1")
 	private Integer version;
 	
-	@NotBlank(message = "quantity不能为空")
+	@NotNull(message = "quantity不能为空")
+	@DecimalMin("1")
 	private Integer quantity;
 	
 	@NotBlank(message = "securityCode不能为空")
